@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import predictors
 
 
 file_names = ["gcc-short.br.txt",
@@ -18,6 +19,8 @@ output_columns = ["file name",
                   "not taken percent",
                   "distinct branches"]
 output_array = pd.DataFrame(columns=output_columns)
+
+
 
 for file_name in file_names:
     df = pd.read_csv(file_name, header=None, names=column_names, sep=" ")
