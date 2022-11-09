@@ -1,5 +1,3 @@
-
-
 class OneBitPredictor:
     def __init__(self, predict):
         self.predict = predict
@@ -66,3 +64,31 @@ class TwoBitPredictor:
 
         self.state.dec()
         self.predict = 'NT' if self.state.count < 2 else 'T'
+
+class ThreeBitPredictor:
+    def __init__(self, predict):
+        self.predict = predict
+        self.state = SaturatedCounter(0,7)
+        self.correct = 0
+        self.incorrect = 0
+        self.total = 0
+
+    def taken(self):
+        self.total += 1
+        if self.predict is 'T':
+            self.correct += 1
+        else:
+            self.incorrect += 1
+
+        self.state.inc()
+        self.predict = 'NT' if self.state.count < 4 else 'T'
+
+    def not_taken(self):
+        self.total += 1
+        if self.predict is 'NT':
+            self.correct += 1
+        else:
+            self.incorrect += 1
+
+        self.state.dec()
+        self.predict = 'NT' if self.state.count < 4 else 'T'
