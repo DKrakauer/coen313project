@@ -1,2 +1,4 @@
 *.br.txt
 .DS_Store
+__pycache__/
+__pycache__/predictors.cpython-39.pyc

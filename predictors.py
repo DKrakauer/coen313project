@@ -1,3 +1,6 @@
+from math import floor
+
+
 class OneBitPredictor:
     def __init__(self, predict):
         self.predict = predict
@@ -7,7 +10,7 @@ class OneBitPredictor:
 
     def taken(self):
         self.total += 1
-        if self.predict is 'NT':
+        if self.predict == 'NT':
             self.predict = 'T'
             self.incorrect += 1
         else:
@@ -16,7 +19,7 @@ class OneBitPredictor:
     
     def not_taken(self):
         self.total += 1
-        if self.predict is 'NT':
+        if self.predict == 'NT':
             self.predict = 'NT'
             self.correct += 1
         else:
@@ -27,7 +30,7 @@ class SaturatedCounter:
     def __init__(self, low, high):
         self.high = high
         self.low = low
-        self.count = 0
+        self.count = floor(high-low/2)
 
     def inc(self):
         if(self.count < self.high):
@@ -47,7 +50,7 @@ class TwoBitPredictor:
 
     def taken(self):
         self.total += 1
-        if self.predict is 'T':
+        if self.predict == 'T':
             self.correct += 1
         else:
             self.incorrect += 1
@@ -57,7 +60,7 @@ class TwoBitPredictor:
 
     def not_taken(self):
         self.total += 1
-        if self.predict is 'NT':
+        if self.predict == 'NT':
             self.correct += 1
         else:
             self.incorrect += 1
@@ -75,7 +78,7 @@ class ThreeBitPredictor:
 
     def taken(self):
         self.total += 1
-        if self.predict is 'T':
+        if self.predict == 'T':
             self.correct += 1
         else:
             self.incorrect += 1
@@ -85,7 +88,7 @@ class ThreeBitPredictor:
 
     def not_taken(self):
         self.total += 1
-        if self.predict is 'NT':
+        if self.predict == 'NT':
             self.correct += 1
         else:
             self.incorrect += 1
