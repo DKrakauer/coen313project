@@ -4,12 +4,12 @@ import pandas as pd
 import predictors
 from tqdm import tqdm
 
-file_names = ["gcc-short.br.txt",
-              "art.br.txt",
-              "sjeng.br.txt",
-              "sphinx3.br.txt",
-              "mcf.br.txt"]
-# file_names = ["gcc-short.br.txt"]
+# file_names = ["gcc-short.br.txt",
+#               "art.br.txt",
+#               "sjeng.br.txt",
+#               "sphinx3.br.txt",
+#               "mcf.br.txt"]
+file_names = ["gcc-short.br.txt"]
 column_names = ["instruction_address",
                 "taken_or_not",
                 "target_address",
@@ -41,13 +41,14 @@ for file_name in file_names:
     three_bit = [predictors.ThreeBitPredictor('NT') for i in range(1024)]
     print("Done!")
 
-    print("Iterrating branches... ", end=' ', flush=True)
+    print("Iterrating branches... ")
     for index, row in tqdm(df.iterrows(), total=df.shape[0]):
         # print(row['instruction_address'], row['taken_or_not'])
+        # print(row[0] + "  " + convertHexToBinary(row[0]))
+        binAddr = convertHexToBinary(row[0])[-10:]
+        tableAddr = convertBinaryToDecimal(binAddr)
+        
         if row['taken_or_not'] == 'T':
-            # print(row[0] + "  " + convertHexToBinary(row[0]))
-            binAddr = convertHexToBinary(row[0])[-10:]
-            tableAddr = convertBinaryToDecimal(binAddr)
             one_bit[tableAddr].taken()
             two_bit[tableAddr].taken()
             three_bit[tableAddr].taken()
