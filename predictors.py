@@ -95,3 +95,34 @@ class ThreeBitPredictor:
 
         self.state.dec()
         self.predict = 'NT' if self.state.count < 4 else 'T'
+
+#Task 5 
+class nBitPredictor:
+    def __init__(self, inital, n):
+        self.predict = inital
+        self.state = SaturatedCounter(0,n)
+        self.correct = 0
+        self.incorrect = 0
+        self.total = 0
+        self.n = n
+
+    def taken(self):
+        self.total += 1
+        if self.predict == 'T':
+            self.correct += 1
+        else:
+            self.incorrect += 1
+
+        self.state.inc()
+        self.predict = 'NT' if self.state.count < floor(0-self.n/2) else 'T'
+
+    def not_taken(self):
+        self.total += 1
+        if self.predict == 'NT':
+            self.correct += 1
+        else:
+            self.incorrect += 1
+
+        self.state.dec()
+        self.predict = 'NT' if self.state.count < floor(0-self.n/2) else 'T'
+
